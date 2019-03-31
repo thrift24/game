@@ -1,0 +1,244 @@
+---
+game:
+   defaults:
+      attributes:
+         strength: 0
+         agility: 0
+         intelligence: 0
+         willpower: 0
+         power: 0
+         reflex: 0
+         awareness: 0
+         resistance: 0
+         impact reduction: 0
+         vitality: 5
+         move cost: 5
+      skills:
+         melee:
+            attribute: agility
+            default: 0
+            specializations:
+               unarmed: 0
+               shields: 0
+               knives: 0
+               balanced swords: 0
+               unbalanced swords: 0
+               axes: 0
+               clubs: 0
+               polearms: 0
+         grappling:
+            attribute: power
+            default: 0
+            specializations:
+               submissions: 0
+               escapes: 0
+               reversals: 0
+         evasion:
+            attribute: agility
+            default: 0
+            specializations:
+               melee evasion: 0
+               projectile evasion: 0
+         firearms:
+            attribute: agility
+            default: 0
+            specializations:
+               pistols: 0
+               shotguns: 0
+               SMGs: 0
+               rifles: 0
+         throwing:
+            attribute: agility
+            default: 0
+            specializations:
+               knives: 0
+               shuriken: 0
+               grenades: 0
+               axes: 0
+               improvised: 0
+         magic:
+            attribute: will
+            default: 0
+            specializations:
+               elemental: 0
+               mana: 0
+               psychic: 0
+         shamanism:
+            attribute: will
+            default: 0
+            specializations:
+               summoning: 0
+               spiritual: 0
+               alteration: 0
+               healing: 0
+         chi powers:
+            attribute: will
+            default: 0
+            specializations:
+               enchancement: 0
+               disruption: 0
+         rigging:
+            attribute: reflex
+            default: 0
+            specializations:
+               gunnery: 0
+               ground piloting: 0
+               air piloting: 0
+               anthopod piloting: 0
+         decking:
+            attribute: intelligence
+            default: 0
+            specializations:
+               navigation: 0
+               hacking: 0
+               cyber combat: 0
+         biotech:
+            attribute: intelligence
+            default: 0
+            specializations:
+               first aid: 0
+               pharmaceutical: 0
+               surgery: 0
+               diagnosis: 0
+         electronics:
+            attribute: intelligence
+            default: 0
+            specializations:
+               repair: 0
+               fabrication: 0
+               diagnosis: 0
+         mechanics:
+            attribute: intelligence
+            default: 0
+            specializations:
+               repair: 0
+               fabrication: 0
+               diagnosis: 0
+         deception:
+            attribute: intelligence
+            default: 0
+            specializations:
+               bluff: 0
+               disguise: 0
+               forge: 0
+               feint: 0
+         nature:
+            attribute: intelligence
+            default: 0
+            specializations:
+               animals: 0
+               plant life: 0
+         survival:
+            attribute: awareness
+            default: 0
+            specializations:
+               tracking: 0
+               foraging: 0
+               navigation: 0
+         chemistry:
+            attribute: intelligence
+            default: 0
+            specializations:
+               biochemistry: 0
+               inorganic chemistry: 0
+         athletics:
+            attribute: power
+            default: 0
+            specializations:
+               jump: 0
+               swim: 0
+               climb: 0
+               acrobatics: 0
+               balance: 0
+         insight:
+            attribute: awareness
+            default: 0
+            specializations:
+               detect lies: 0
+               read feint: 0
+               detect emotion: 0
+               astral sense: 0
+         perception:
+            attribute: awareness
+            default: 0
+            specializations:
+               spot: 0
+               search: 0
+               listen: 0
+               read feint: 0
+         intimidation:
+            attribute: will
+            default: 0
+            specializations:
+               coercion: 0
+               interrogation: 0
+         social:
+            attribute: awareness
+            default: 0
+            specializations:
+               negotiation: 0
+               small talk: 0
+               diplomacy: 0
+         stealth:
+            attribute: reflex
+            default: 0
+            specializations:
+               hide: 0
+               move silent: 0
+   race:
+      human:
+         skillBonus: 30
+         talentBonus: 10
+
+      elf:
+         attributes:
+            strength: -1
+            agility: 1
+            vitality: -1
+         skills:
+            social:
+               default: 2
+            perception:
+               default: 2
+         talents:
+            - low-light vision
+      dwarf:
+         attributes:
+            resistance: 2
+            agility: -2
+            impact reduction: 2
+            vitality: 1
+         skills:
+            social:
+               default: -2
+         talents:
+            - inrared vision
+      orc:
+         attributes:
+            strength: 2
+            agility: -2
+            impact reduction: 2
+            vitality: 1
+         skills:
+            social: 
+               default: -2
+            intimidation: 
+               default: 2
+         talents:
+            - low light vision
+      troll:
+         attributes:
+            strength: 4
+            resistance: 2
+            vitality: 4
+            agility: -4
+            intelligence: -4
+         skills:
+            social: 
+               default: -4
+            intimidation: 
+               default: 4
+         talents:
+            - +1 Melee Range
+            - infrared vision
+
