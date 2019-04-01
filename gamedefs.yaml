@@ -1,6 +1,11 @@
 ---
 game:
-   values:
+   defaults:
+      primary attributes:
+       - strength
+       - agility
+       - intelligence
+       - willpower
       attributes:
          strength: 0
          agility: 0
@@ -13,6 +18,8 @@ game:
          impact reduction: 0
          vitality: 5
          move cost: 5
+         stamina: 10
+         melee range: 0
       skills:
          melee:
             attribute: agility
@@ -185,11 +192,139 @@ game:
             specializations:
                hide: 0
                move silent: 0
-   race:
+      talents:
+         blind fighting:
+            tier: 1
+            value: 0
+            max: 4
+            type: other
+         increased stamina:
+            tier: 1
+            value: 0
+            max: 5
+            type: attribute modifier
+            attribute: stamina
+            intensity: 1
+         increased stability:
+            tier: 1
+            value: 0
+            max: 5
+            type: attribute modifier
+            attribute: impact reduction 
+            intensity: 1
+         increased vitality:
+            tier: 1
+            value: 0
+            max: 5
+            type: attribute modifier
+            attribute: vitality
+            intensity: 1
+         easy income:
+            tier: 1
+            value: 0
+            max: 4
+            type: other
+         magic endurance:
+            tier: 1
+            value: 0
+            max: 1
+            type: other
+         mobility:
+            tier: 1
+            value: 0
+            max: 1
+            type: attribute modifier
+            attribute: move cost
+            intensity: -2
+         endure elements: 
+            tier: 1
+            value: 0
+            max: 1
+            type: other
+         projectile defenses:
+            tier: 1
+            value: 0
+            max: 1
+            type: other
+         low-light vision:
+            tier: 2
+            value: 0
+            max: 1
+            type: other
+         infrared vision:
+            tier: 2
+            value: 0
+            max: 1
+            type: other
+         melee range:
+            tier: 2
+            value: 0
+            max: 1
+            type: attribute modifier
+            attribute: melee range
+            intensity: 1
+      flaws:
+         bounty:
+            XP: 50
+            value: 0
+            max: 1
+            type: other
+         limited magic:
+            XP: 25
+            value: 0
+            max: 2
+            type: other
+            group: none
+            subgroup: none
+         clumsy:
+            XP: 20
+            value: 0
+            max: 1
+            type: skill roll modifier
+            skill: athletics
+            intensity: -2
+         poor cardio:
+            XP: 25
+            value: 0
+            max: 1
+            type: attribute modifier
+            attribute: stamina
+            intensity: -1
+         tunnel vision:
+            XP: 20
+            value: 0
+            max: 1
+            type: skill roll modifier
+            skill: perception
+            intensity: -2
+         light sleeper:
+            XP: 20
+            value: 0
+            max: 1
+            type: other
+         bad temper:
+            XP: 20
+            value: 0
+            max: 1
+            type: other
+         easy to read:
+            XP: 20
+            value: 0
+            max: 1
+            type: skill roll modifier
+            skill: deception
+            intensity: -2
+         chunky:
+            XP: 40
+            value: 0
+            max: 3
+            type: attribute modifier
+            attribute: move cost
+            intensity: 1
+   races:
       human:
-         skillBonus: 30
-         talentBonus: 10
-
+         skillBonusXP: 30
+         talentBonusXP: 10
       elf:
          attributes:
             strength: -1
@@ -201,7 +336,8 @@ game:
             perception:
                value: 2
          talents:
-            - low-light vision
+            low-light vision:
+                    value: 1
       dwarf:
          attributes:
             resistance: 2
@@ -212,7 +348,8 @@ game:
             social:
                value: -2
          talents:
-            - inrared vision
+            infrared vision:
+               value: 1
       ork:
          attributes:
             strength: 2
@@ -225,7 +362,8 @@ game:
             intimidation: 
                value: 2
          talents:
-            - low light vision
+            low-light vision:
+               value: 1
       troll:
          attributes:
             strength: 4
@@ -239,6 +377,7 @@ game:
             intimidation: 
                value: 4
          talents:
-            - +1 Melee Range
-            - infrared vision
-
+            infrared vision:
+               value: 1
+            melee range:
+               value: 1
