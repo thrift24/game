@@ -1,6 +1,6 @@
 ---
 game:
-   defaults:
+   values:
       attributes:
          strength: 0
          agility: 0
@@ -16,7 +16,7 @@ game:
       skills:
          melee:
             attribute: agility
-            default: 0
+            value: 0
             specializations:
                unarmed: 0
                shields: 0
@@ -28,20 +28,20 @@ game:
                polearms: 0
          grappling:
             attribute: power
-            default: 0
+            value: 0
             specializations:
                submissions: 0
                escapes: 0
                reversals: 0
          evasion:
             attribute: agility
-            default: 0
+            value: 0
             specializations:
                melee evasion: 0
                projectile evasion: 0
          firearms:
             attribute: agility
-            default: 0
+            value: 0
             specializations:
                pistols: 0
                shotguns: 0
@@ -49,7 +49,7 @@ game:
                rifles: 0
          throwing:
             attribute: agility
-            default: 0
+            value: 0
             specializations:
                knives: 0
                shuriken: 0
@@ -58,14 +58,14 @@ game:
                improvised: 0
          magic:
             attribute: will
-            default: 0
+            value: 0
             specializations:
                elemental: 0
                mana: 0
                psychic: 0
          shamanism:
             attribute: will
-            default: 0
+            value: 0
             specializations:
                summoning: 0
                spiritual: 0
@@ -73,13 +73,13 @@ game:
                healing: 0
          chi powers:
             attribute: will
-            default: 0
+            value: 0
             specializations:
                enchancement: 0
                disruption: 0
          rigging:
             attribute: reflex
-            default: 0
+            value: 0
             specializations:
                gunnery: 0
                ground piloting: 0
@@ -87,14 +87,14 @@ game:
                anthopod piloting: 0
          decking:
             attribute: intelligence
-            default: 0
+            value: 0
             specializations:
                navigation: 0
                hacking: 0
                cyber combat: 0
          biotech:
             attribute: intelligence
-            default: 0
+            value: 0
             specializations:
                first aid: 0
                pharmaceutical: 0
@@ -102,21 +102,21 @@ game:
                diagnosis: 0
          electronics:
             attribute: intelligence
-            default: 0
+            value: 0
             specializations:
                repair: 0
                fabrication: 0
                diagnosis: 0
          mechanics:
             attribute: intelligence
-            default: 0
+            value: 0
             specializations:
                repair: 0
                fabrication: 0
                diagnosis: 0
          deception:
             attribute: intelligence
-            default: 0
+            value: 0
             specializations:
                bluff: 0
                disguise: 0
@@ -124,26 +124,26 @@ game:
                feint: 0
          nature:
             attribute: intelligence
-            default: 0
+            value: 0
             specializations:
                animals: 0
                plant life: 0
          survival:
             attribute: awareness
-            default: 0
+            value: 0
             specializations:
                tracking: 0
                foraging: 0
                navigation: 0
          chemistry:
             attribute: intelligence
-            default: 0
+            value: 0
             specializations:
                biochemistry: 0
                inorganic chemistry: 0
          athletics:
             attribute: power
-            default: 0
+            value: 0
             specializations:
                jump: 0
                swim: 0
@@ -152,7 +152,7 @@ game:
                balance: 0
          insight:
             attribute: awareness
-            default: 0
+            value: 0
             specializations:
                detect lies: 0
                read feint: 0
@@ -160,7 +160,7 @@ game:
                astral sense: 0
          perception:
             attribute: awareness
-            default: 0
+            value: 0
             specializations:
                spot: 0
                search: 0
@@ -168,20 +168,20 @@ game:
                read feint: 0
          intimidation:
             attribute: will
-            default: 0
+            value: 0
             specializations:
                coercion: 0
                interrogation: 0
          social:
             attribute: awareness
-            default: 0
+            value: 0
             specializations:
                negotiation: 0
                small talk: 0
                diplomacy: 0
          stealth:
             attribute: reflex
-            default: 0
+            value: 0
             specializations:
                hide: 0
                move silent: 0
@@ -197,9 +197,9 @@ game:
             vitality: -1
          skills:
             social:
-               default: 2
+               value: 2
             perception:
-               default: 2
+               value: 2
          talents:
             - low-light vision
       dwarf:
@@ -210,10 +210,10 @@ game:
             vitality: 1
          skills:
             social:
-               default: -2
+               value: -2
          talents:
             - inrared vision
-      orc:
+      ork:
          attributes:
             strength: 2
             agility: -2
@@ -221,9 +221,9 @@ game:
             vitality: 1
          skills:
             social: 
-               default: -2
+               value: -2
             intimidation: 
-               default: 2
+               value: 2
          talents:
             - low light vision
       troll:
@@ -235,9 +235,9 @@ game:
             intelligence: -4
          skills:
             social: 
-               default: -4
+               value: -4
             intimidation: 
-               default: 4
+               value: 4
          talents:
             - +1 Melee Range
             - infrared vision

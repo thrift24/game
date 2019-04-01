@@ -8,25 +8,25 @@ gameDefinitionsFile = open("gamedefs.yaml", "r")
 gameDefinitions = yaml.load(gameDefinitionsFile, Loader=yaml.FullLoader)
 gameDefinitionsFile.close()
 
-attributeDefaults = {}
-for attributeName in gameDefinitions['game']['defaults']['attributes']:
-       attributeDefaults[attributeName] = gameDefinitions['game']['defaults']['attributes'][attributeName]
+attributeValues = {}
+for attributeName in gameDefinitions['game']['values']['attributes']:
+       attributeValues[attributeName] = gameDefinitions['game']['values']['attributes'][attributeName]
 
-skillDefaults = {}
-for skillName in gameDefinitions['game']['defaults']['skills']:
-    skillDefaults[skillName] = {}
-    skillDefaults[skillName]['attribute'] = gameDefinitions['game']['defaults']['skills'][skillName]['attribute']
-    skillDefaults[skillName]['default'] = gameDefinitions['game']['defaults']['skills'][skillName]['default']
+skillValues = {}
+for skillName in gameDefinitions['game']['values']['skills']:
+    skillValues[skillName] = {}
+    skillValues[skillName]['attribute'] = gameDefinitions['game']['values']['skills'][skillName]['attribute']
+    skillValues[skillName]['value'] = gameDefinitions['game']['values']['skills'][skillName]['value']
 
-    skillDefaults[skillName]['specializations'] = {}
-    for specialization in gameDefinitions['game']['defaults']['skills'][skillName]['specializations']:
-        skillDefaults[skillName]['specializations'][specialization] = gameDefinitions['game']['defaults']['skills'][skillName]['specializations'][specialization]
+    skillValues[skillName]['specializations'] = {}
+    for specialization in gameDefinitions['game']['values']['skills'][skillName]['specializations']:
+        skillValues[skillName]['specializations'][specialization] = gameDefinitions['game']['values']['skills'][skillName]['specializations'][specialization]
 
 class Race:
     def __init__(self, raceName, raceAttributes, raceSkills, raceTalents, raceFlaws, raceSkillBonus, raceTalentBonus):
        self.name            = raceName
-       self.attributes      = copy.deepcopy(attributeDefaults)
-       self.skills          = copy.deepcopy(skillDefaults)
+       self.attributes      = copy.deepcopy(attributeValues)
+       self.skills          = copy.deepcopy(skillValues)
        self.talents         = raceTalents
        self.flaws           = raceFlaws
        self.raceSkillBonus  = raceSkillBonus
@@ -36,53 +36,112 @@ class Race:
            self.attributes[raceAttribute] += attributeValue
 
        for raceSkill, skillDictionary in raceSkills.items():
-           self.skills[raceSkill]['default'] = skillDictionary['default']
+           self.skills[raceSkill]['value'] = skillDictionary['value']
 
            if 'specializations' in skillDictionary:
               for skillSpeciality, skillValue in skillDictionary['specializations'].items():
                   self.skills[raceSkill]['specializations'][skillSpeciality] = skillValue
 
-#class Character:
-#   def __init__(self, characterName, characterStrength, characterAgility, characterIntelligence, characterWillpower):
-#       self.name         = characterName
-#       self.strength     = characterStrength
-#       self.agility      = characterAgility
-#       self.intelligence = characterIntelligence
-#       self.willpower    = characterWillpower
-#       self.power        = floor ( ( self.strength     + self.agility ) / 2 )
-#       self.reflex       = floor ( ( self.agility      + self.intelligence ) / 2 )
-#       self.awareness    = floor ( ( self.intelligence + self.willpower ) / 2 )
-#       self.resistance   = floor ( ( self.will         + self.strength ) / 2 )
-#
+class CharacterCustomizations:
+   def __init__(self, customAttributes, customSkills, customTalents, customFlaws, skillBonus, talentBonus):
+      self.attributes        = copy.deepcopy(attributeValues)
+      self.skills            = copy.deepcopy(skillValues)
+      self.talents           = customTalents
+      self.flaws             = customFlaws
+      self.skillBonus  = skillBonus
+      self.talentBonus = talentBonus
+
+      self.XPSpent = 0
+      validCharacter = True
+
+      for customAttribute, attributeValue in customAttributes.items():
+          for nextRank in range(0,attributeValue+1):
+              self.XPSpent += nextRank * 20
+
+          self.attributes[customAttribute] += attributeValue
+      
+      for customSkill, skillDictionary in customSkills.items():
+         for nextRank in range(0,skillDictionary['value']+1):
+            cost = nextRank * 5
+
+            if self.skillBonus < cost:
+               cost -= self.skillBonus
+               self.skillBonus = 0
+            else :
+               self.skillBonus -= cost
+               cost = 0
+
+            self.XPSpent += cost
+
+         self.skills[customSkill]['value'] = skillDictionary['value']
+
+         if 'specializations' in skillDictionary:
+            for skillSpeciality, skillValue in skillDictionary['specializations'].items():
+               for nextRank in range(0,skillValue+1):
+                  cost = nextRank * 5
+
+                  if self.skillBonus < cost:
+                     cost -= self.skillBonus
+                     self.skillBonus = 0
+                  else :
+                     self.skillBonus -= cost
+                     cost = 0
+
+                  self.XPSpent += cost
+
+                  self.skills[customSkill]['specializations'][skillSpeciality] = skillValue
+
+      print(self.XPSpent)
+
+
+class Character:
+   def __init__(self, characterName, race, customizations):
+      self.name             = characterName
+
+      for attributeName, raceValueValue in race.attributes.items():
+          print(attributeName + " : " + str(raceValueValue))
+
+      #self.attributes.bonus      = copy.deepcopy(race.attributeValues)
+      #self.skills.bonus          = copy.deepcopy(race.skillValues)
+      #self.talents         = copy.deepcopy(race.talents)
+      #self.flaws           = copy.deepcopy(race.flaws)
+      #self.skillBonus      = race.skillBonus
+      #self.talentBonus     = race.talentBonus
+
+      #self.power        = floor ( ( self.strength     + self.agility ) / 2 )
+      #self.reflex       = floor ( ( self.agility      + self.intelligence ) / 2 )
+      #self.awareness    = floor ( ( self.intelligence + self.willpower ) / 2 )
+      #self.resistance   = floor ( ( self.will         + self.strength ) / 2 )
+
 
 races = {}
 generatedRaces ={}
 for race in gameDefinitions['game']['race']:
    races[race] = {}
-   races[race]['attributeDefaults'] = {}
+   races[race]['attributeValues'] = {}
    if "attributes" in gameDefinitions['game']['race'][race]:
       for attributeName in gameDefinitions['game']['race'][race]['attributes']:
-         races[race]['attributeDefaults'][attributeName] = gameDefinitions['game']['race'][race]['attributes'][attributeName]
+         races[race]['attributeValues'][attributeName] = gameDefinitions['game']['race'][race]['attributes'][attributeName]
 
-   races[race]['skillDefaults'] = {}
+   races[race]['skillValues'] = {}
    if "skills" in gameDefinitions['game']['race'][race]:
       for skillName in gameDefinitions['game']['race'][race]['skills']:
 
-         races[race]['skillDefaults'][skillName] = {}
-         races[race]['skillDefaults'][skillName]['default'] = gameDefinitions['game']['race'][race]['skills'][skillName]['default']
+         races[race]['skillValues'][skillName] = {}
+         races[race]['skillValues'][skillName]['value'] = gameDefinitions['game']['race'][race]['skills'][skillName]['value']
    
-         races[race]['skillDefaults'][skillName]['specializations'] = {}
+         races[race]['skillValues'][skillName]['specializations'] = {}
          if "specializations" in gameDefinitions['game']['race'][race]['skills'][skillName]:
             for specialization in gameDefinitions['game']['race'][race]['skills'][skillName]['specializations']:
-               races[race]['skillDefaults'][skillName]['specializations'][specialization] = gameDefinitions['game']['race'][race]['skills'][skillName]['specializations'][specialization]
+               races[race]['skillValues'][skillName]['specializations'][specialization] = gameDefinitions['game']['race'][race]['skills'][skillName]['specializations'][specialization]
 
-   races[race]['talentDefaults'] = []
+   races[race]['talentValues'] = []
    if "talents" in gameDefinitions['game']['race'][race]:
-       races[race]['talentDefaults'] = gameDefinitions['game']['race'][race]['talents']
+       races[race]['talentValues'] = gameDefinitions['game']['race'][race]['talents']
 
-   races[race]['flawDefaults'] = []
+   races[race]['flawValues'] = []
    if "flaws" in gameDefinitions['game']['race'][race]:
-       races[race]['flawDefaults'] = gameDefinitions['game']['race'][race]['flaws']
+       races[race]['flawValues'] = gameDefinitions['game']['race'][race]['flaws']
 
    races[race]['skillBonus'] = 0
    if "skillBonus" in gameDefinitions['game']['race'][race]:
@@ -93,13 +152,16 @@ for race in gameDefinitions['game']['race']:
        races[race]['talentBonus'] = gameDefinitions['game']['race'][race]['talentBonus']
 
    generatedRaces[race] = Race(race, 
-                               races[race]['attributeDefaults'], 
-                               races[race]['skillDefaults'], 
-                               races[race]['talentDefaults'], 
-                               races[race]['flawDefaults'], 
+                               races[race]['attributeValues'], 
+                               races[race]['skillValues'], 
+                               races[race]['talentValues'], 
+                               races[race]['flawValues'], 
                                races[race]['skillBonus'], 
                                races[race]['talentBonus'])
 
+#quitthat
+mycustomizations = CharacterCustomizations( { 'agility': 2}, { 'melee': {'value': 2, 'specializations': { 'swords': 1 }}}, [], [], 0, 0)
+#mycharacter = Character("hero", generatedRaces['ork'], {})
 #generatedRaces[racenamegoeshere]
 #XP cost
 #generate a character
