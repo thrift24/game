@@ -64,14 +64,14 @@ game:
                axes: 0
                improvised: 0
          magic:
-            attribute: will
+            attribute: willpower
             value: 0
             specializations:
                elemental: 0
                mana: 0
                psychic: 0
          shamanism:
-            attribute: will
+            attribute: willpower
             value: 0
             specializations:
                summoning: 0
@@ -79,7 +79,7 @@ game:
                alteration: 0
                healing: 0
          chi powers:
-            attribute: will
+            attribute: willpower
             value: 0
             specializations:
                enchancement: 0
@@ -174,7 +174,7 @@ game:
                listen: 0
                read feint: 0
          intimidation:
-            attribute: will
+            attribute: willpower
             value: 0
             specializations:
                coercion: 0
