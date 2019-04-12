@@ -1,6 +1,18 @@
 ---
 game:
    defaults:
+      xp:
+         general: 135
+         skills: 0
+         talents: 0
+         attributes: 0
+         attributesRankCostFactor: 20
+         skillsRankCostFactor: 5
+         talentRankCostFactor: 20
+      spentxp:
+         skills: 0
+         talents: 0
+         attributes: 0
       primary attributes:
        - strength
        - agility
